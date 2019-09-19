@@ -1,0 +1,217 @@
+// Définition des variables de couleur
+$brown    : #151000;
+$off-white: #fffed6;
+$red      : #da3831;
+$green    : #00c8a6;
+$black    : #323232;
+
+
+// Définition des variables pour les font
+$font-family : 'Open Sans', sans-serif;
+
+// Définition de la largeur du plateau
+$board-width: 790px;
+ 
+// Mixin
+@mixin transition($what: all, $time: 0.2s, $how: ease-in-out) {
+    -webkit-transition: $what $time $how;
+    -moz-transition:    $what $time $how;
+    -ms-transition:     $what $time $how;
+    -o-transition:      $what $time $how;
+    transition:         $what $time $how;
+} 
+
+// HTML & Body
+html{
+	font-size:100%;
+}
+body {
+	font-family: $font-family;
+	color: $black;
+	background-color: $brown;
+	margin: 0;
+	padding: 0;
+	font-size:1em;
+}
+
+// Titre Header
+h1{
+	margin: 0px;
+	padding: 0px;
+	line-height: 2em;
+	text-align: center;
+	color: $off-white;
+}
+
+// Container
+#main-container{
+	width: $board-width;
+	margin:20px auto 0px auto;
+	display: block;
+}
+
+// Plateau de jeu
+#container-board{
+	display: none;
+	position: relative;
+
+	#timer{
+		position: absolute;
+	    left: 50%;
+	    top: -20px;
+	    font-weight: 700;
+	    width: 14em;
+	    margin: 0px 0px 0px -7em;
+	    text-align: center;
+	    text-transform: uppercase;
+	    font-size: 1em;
+	    background-color: $red;
+	    color: $off-white;
+	    line-height: 2.5em;
+	    border-radius: 5px;
+		z-index: 2;
+	    div{
+	    	display: inline-block;
+	    }
+	    
+	}
+
+	#board-game{
+		width: $board-width;
+		text-align: center;
+		padding: 25px 0px 15px 0px;
+		border-radius: 5px;
+		position: relative;
+		background-color: $green;
+		z-index: 1;
+	}
+	
+	// Barre de progression
+	#progress-bar{
+		display: block;
+		height: 20px;
+		padding: 5px;
+		margin-top: 10px;
+		background-color: $off-white;
+		border-radius: 5px;
+
+		#bar{
+			background-color: $red;
+			height: 20px;
+			display: block;
+			border-radius: 5px;
+			width: 0%;
+			display: none;
+			@include transition ();
+		}
+
+	}
+}
+
+// Cartes
+.card{
+	width: $board-width / 7 ;
+	display: inline-block;
+	margin :5px;
+	height: 100px;
+	width: 100px;
+	perspective: 1000px;
+	cursor: pointer;
+
+	.inside{
+		width: 100%;
+		height: 100%;
+		display: block;
+		position: relative;
+		transform-style: preserve-3d;
+		@include transition (transform,0.8s,ease-in-out);
+		
+		.front, .back{
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			backface-visibility: hidden;
+			border-radius: 5px;
+		}
+		
+		.back{
+			background-image: url('../images/cards.png');
+			transform: rotateY(180deg);
+		}
+		
+		.front{
+			background-color: $off-white;
+		}
+	}
+
+	&.cursor-default{
+		cursor: default;
+	}
+
+	&.active .inside{
+  		transform: rotateY(180deg);
+	}
+
+}
+
+//Info
+#info{
+	display: none;
+}
+
+// Affichage des records
+#board-record{
+	background-color: #eeeeee;
+	border-radius: 3px;
+	position: relative;
+	text-align: center;
+
+	h2{
+		position: absolute;
+	    left: 50%;
+	    top: -20px;
+	    font-weight: 700;
+	    width: 14em;
+	    margin: 0px 0px 0px -7em;
+	    z-index: 2;
+	    text-align: center;
+	    text-transform: uppercase;
+	    font-size: 1em;
+	    background-color: $red;
+	    color: $off-white;
+	    line-height: 2.5em;
+	    border-radius: 5px;
+	}
+
+	ul{
+		margin: 0px;
+		padding:30px 0px 10px 0px;
+		line-height: 2em;
+		
+		li{
+			list-style-type: none;
+		}
+
+	}
+
+	#button-start{
+		display: inline-block;
+		padding: 1em 2em;
+		background-color: $green;
+		text-decoration: none;
+		text-transform: uppercase;
+		color: $off-white;
+		border-radius: 5px;
+		margin: 10px 0px 20px 0px;
+		@include transition ();
+
+		&:hover {
+		   background-color: darken($green, 10%);
+		}
+
+	}
+}
+
+
