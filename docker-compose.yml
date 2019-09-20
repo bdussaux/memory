@@ -19,7 +19,7 @@ services:
     ports :
      - "80:80"
     volumes:
-     - /Users/benoitdussaux/Documents/DEV/memory/www:/var/www/html/
+     - /chemin/vers/app/memory/www:/var/www/html/
     links:
      - db
   # Container pour phpmyadmin (facultatif pour faire fonctionner l'application)
